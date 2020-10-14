@@ -21,17 +21,26 @@ namespace SeleniumTest
 
             //driver.FindElement(By.XPath("/html/body/div[2]/div[2]/div[1]/div[1]/div[2]/div[3]/ul/li[2]/a")).Click();
 
-
+            //přihlášení
             driver.FindElement(By.Name("log")).SendKeys("opensourcecms");
             driver.FindElement(By.Name("pwd")).SendKeys("opensourcecms"+ Keys.Enter);
 
             driver.FindElement(By.XPath("/html/body/div[1]/div[1]/div[2]/ul/li[3]/a/div[3]")).Click();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
 
             driver.FindElement(By.XPath("/html/body/div[1]/div[1]/div[2]/ul/li[3]/ul/li[5]/a")).Click();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
 
+            //vytvoření tagu
             driver.FindElement(By.Id("tag-name")).SendKeys("1234"+ Keys.Enter);
+
+
+            //nalezení tagu
+            driver.FindElement(By.Id("tag-search-input")).SendKeys("1234" + Keys.Enter);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3000);
+            
+
+            //odstranění tagu
+            driver.FindElement(By.XPath("/html/body/div[1]/div[2]/div[2]/div[1]/div[4]/div[2]/div[2]/div/form/table/tbody/tr/td[1]/div[2]/span[3]/a")).Click();
+
         }
     }
 }
