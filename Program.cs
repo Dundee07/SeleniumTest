@@ -1,5 +1,6 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,8 +22,10 @@ namespace SeleniumTest
 
             //driver.FindElement(By.XPath("/html/body/div[2]/div[2]/div[1]/div[1]/div[2]/div[3]/ul/li[2]/a")).Click();
 
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+
             //přihlášení
-            driver.FindElement(By.Name("log")).SendKeys("opensourcecms");
+            driver.FindElement(By.Id("user_login")).SendKeys("opensourcecms");
             driver.FindElement(By.Name("pwd")).SendKeys("opensourcecms"+ Keys.Enter);
 
             driver.FindElement(By.XPath("/html/body/div[1]/div[1]/div[2]/ul/li[3]/a/div[3]")).Click();
@@ -36,11 +39,14 @@ namespace SeleniumTest
             //nalezení tagu
             driver.FindElement(By.Id("tag-search-input")).SendKeys("1234" + Keys.Enter);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3000);
-            
+
 
             //odstranění tagu
+            Actions action = new Actions(driver);
+            action.MoveByOffset(200, 100).Perform();
             driver.FindElement(By.XPath("/html/body/div[1]/div[2]/div[2]/div[1]/div[4]/div[2]/div[2]/div/form/table/tbody/tr/td[1]/div[2]/span[3]/a")).Click();
 
+            driver.FindElement(By.Id("tag-slug")).SendKeys("4321" + Keys.Enter);
         }
     }
 }
